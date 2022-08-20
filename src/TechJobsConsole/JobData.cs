@@ -49,12 +49,30 @@ namespace TechJobsConsole
             {
                 string aValue = row[column];
 
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value.ToLower()))
                 {
                     jobs.Add(row);
                 }
             }
 
+            return jobs;
+        }
+
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+                foreach (KeyValuePair<string, string> item in row)
+                {
+                    if (item.Value.ToLower().Contains(value.ToLower())) ;
+                    jobs.Add(row);
+                    break;
+                }
+            }
             return jobs;
         }
 
@@ -114,7 +132,7 @@ namespace TechJobsConsole
             // Loop through the row string one char at a time
             foreach (char c in row.ToCharArray())
             {
-                if ((c == fieldSeparator && !isBetweenQuotes))
+                if (c == fieldSeparator && !isBetweenQuotes)
                 {
                     rowValues.Add(valueBuilder.ToString());
                     valueBuilder.Clear();
