@@ -72,9 +72,12 @@ namespace TechJobsConsole
             {
                 foreach (KeyValuePair<string, string> item in row)
                 {
-                    if (item.Value.ToLower().Contains(value.ToLower())) ;
-                    jobs.Add(row);
-                    break;
+                    if (item.Value.ToLower().Contains(value.ToLower()))
+                    {
+                        jobs.Add(row);
+                        break;
+                    }
+                    
                 }
             }
             return jobs;
